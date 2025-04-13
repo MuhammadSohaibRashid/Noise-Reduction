@@ -4,6 +4,7 @@
     
 ![image](https://user-images.githubusercontent.com/84375995/138570711-b802d8e7-f4c7-43aa-8f8f-da77cbbcd01d.png)
 
+# Hey I'm Sohaib new to open source but working in python for past couple of years and i have also devloped a noise reduction end to end pipeline where i used mulitple libraries and a model to detect hte actual background noise and remove that with the context.I'll be surely uplaoding that on github and want a review from ur side if possible.Thanks mate.
 
 </p>  
 

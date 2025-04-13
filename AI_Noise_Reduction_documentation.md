@@ -194,23 +194,44 @@ fig.colorbar(cax)
 3. If you set vmax smaller than vmin, internally they will be swapped. Although, depending on the exact version of matplotlib and the precise functions called, matplotlib might give an error warning. So, best to set vmin always lower than vmax.
 
 ~~~python 
-def plot_statistics_and_filter(            
-    mean_freq_noise, std_freq_noise, noise_thresh, smoothing_filter
-):
-    
+def plot_statistics_and_filter(mean_freq_noise, std_freq_noise, noise_thresh, smoothing_filter):
+    """
+    Plots the standard deviation of noise power, noise threshold, and smoothing filter.
+
+    Parameters:
+    -----------
+    mean_freq_noise : array-like
+        Mean power of noise across frequencies.
+    std_freq_noise : array-like
+        Standard deviation of noise power across frequencies.
+    noise_thresh : array-like
+        Threshold for noise masking.
+    smoothing_filter : 2D array-like
+        Filter kernel used for smoothing the mask.
+    """
     fig, ax = plt.subplots(ncols=2, figsize=(20, 4))
-    plt_std, = ax[0].plot(std_freq_noise, label="Std. power of noise") 
-                                                                       
-                                                                       
-    plt_std, = ax[0].plot(noise_thresh, label="Noise threshold (by frequency)")  
-    ax[0].set_title("Threshold for mask")    
-                                             
+    
+    # Plot std and threshold
+    ax[0].plot(std_freq_noise, label="Std. power of noise", color='blue', linestyle='-')
+    ax[0].plot(noise_thresh, label="Noise threshold (by frequency)", color='red', linestyle='--')
+    ax[0].set_title("Threshold for mask", fontsize=12)
+    ax[0].set_xlabel("Frequency bin")
+    ax[0].set_ylabel("Power")
     ax[0].legend()
-    cax = ax[1].matshow(smoothing_filter, origin="lower")
-    fig.colorbar(cax)
-    ax[1].set_title("Filter for smoothing Mask") 
-                                                
+    ax[0].grid(True, linestyle='--', alpha=0.6)
+
+    # Plot smoothing filter
+    cax = ax[1].matshow(smoothing_filter, origin="lower", cmap='viridis')
+    fig.colorbar(cax, ax=ax[1], label="Filter value")
+    ax[1].set_title("Filter for smoothing Mask", fontsize=12)
+    ax[1].set_xlabel("Filter X-axis")
+    ax[1].set_ylabel("Filter Y-axis")
+
+    plt.tight_layout()
     plt.show()
+
+    # Optional: return fig and ax for further modifications
+    # return fig, ax
 ~~~
 1.  Plots basic statistics of noise reduction.
 2. Signal-to-noise ratio (SNR or S/N) is a measure used in science and engineering that compares the level of a desired signal to the level of background noise. 
